@@ -21,4 +21,9 @@ public class CarService implements ICarService {
     public List<Car> getByMake(String make) {
         return this.carRepository.findAllByMakeOrderByModelAscTravelledDistanceDesc(make);
     }
+
+    @Override
+    public List<Car> getAllCarsWithParts() {
+        return this.carRepository.findAll();
+    }
 }

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ICarService {
 
-    public List<Car> getByMake(String make);
+    List<Car> getByMake(String make);
+
+    List<Car> getAllCarsWithParts();
 
 }

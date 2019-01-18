@@ -1,9 +1,8 @@
 package org.cardealership.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "cars")
 public class Car {
@@ -17,6 +16,18 @@ public class Car {
     private String model;
 
     private Long travelledDistance;
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+            @JoinTable(
+                    name = "parts_cars",
+                    joinColumns = {
+                            @JoinColumn(name = "part_id")
+                    },
+                    inverseJoinColumns = {
+                            @JoinColumn(name = "car_id")
+                    }
+            )
+    Set<Part> parts = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -48,5 +59,13 @@ public class Car {
 
     public void setTravelledDistance(Long travelledDistance) {
         this.travelledDistance = travelledDistance;
+    }
+
+    public Set<Part> getParts() {
+        return parts;
+    }
+
+    public void setParts(Set<Part> parts) {
+        this.parts = parts;
     }
 }
